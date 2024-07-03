@@ -11,13 +11,13 @@ trait GenerateTokenResponseTrait
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token, $request): array
+    protected function respondWithToken($token)
     {
         return response()->json([
             'status' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => $request->user()->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
 }

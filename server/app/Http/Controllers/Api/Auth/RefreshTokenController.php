@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Traits\GenerateTokenResponseTrait;
-use Illuminate\Http\Request;
 
 class RefreshTokenController extends Controller
 {
@@ -14,8 +13,8 @@ class RefreshTokenController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        return $this->respondWithToken($request->user()->refresh(), $request);
+        return $this->respondWithToken(auth('api')->refresh());
     }
 }

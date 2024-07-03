@@ -26,4 +26,11 @@ class DeleteAccountRequest extends FormRequest
             'password' => 'required|string|min:8',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'confirmation.in' => "Sorry! You provided an invalid command. Please type 'sure!delete my account' correctlly to delete your account"
+        ];
+    }
 }
