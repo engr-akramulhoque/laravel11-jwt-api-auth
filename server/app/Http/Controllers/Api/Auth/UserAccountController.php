@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UpdateProfileRequest;
-use App\Models\User;
-use App\Observers\CheckEmailChangeObserver;
 
 class UserAccountController extends Controller
 {
@@ -35,8 +33,10 @@ class UserAccountController extends Controller
             unset($input['avatar']);
         }
 
-        // check if the email is changed
-        User::observe(CheckEmailChangeObserver::class);
+        // Check if the email has changed
+        if ($request->email !== $request->user('api')->email) {
+            $input['email_verified_at'] = null;
+        }
 
         $request->user('api')->update($input);
 
