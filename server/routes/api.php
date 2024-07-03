@@ -13,11 +13,11 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('register', [RegisterNewUserController::class, 'store']);
 });
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'account'], function () {
-    Route::post('/', [UserAccountController::class, 'profile']);
+Route::group(['middleware' => 'auth:api', 'prefix' => 'user/account'], function () {
+    Route::get('', [UserAccountController::class, 'profile']);
     Route::put('/update', [UserAccountController::class, 'update']);
     Route::put('/change-password', UpdatePasswordController::class);
-    Route::delete('/delete', DeleteAccountController::class);
+    Route::delete('/destroy', DeleteAccountController::class);
 
     Route::post('refresh/token', RefreshTokenController::class);
     Route::post('logout', [AuthenticateSessionController::class, 'logout']);

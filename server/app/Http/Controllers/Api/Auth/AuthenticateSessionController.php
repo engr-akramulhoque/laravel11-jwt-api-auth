@@ -20,11 +20,11 @@ class AuthenticateSessionController extends Controller
 
         if (!$token = auth('api')->attempt($credentials)) {
             return response()->json([
-                'error' => 'Invalid credentials'
+                'error' => 'Invalid email or password'
             ], 401);
         }
 
-        return $this->respondWithToken($token, $request);
+        return $this->respondWithToken($token);
     }
 
     /**
