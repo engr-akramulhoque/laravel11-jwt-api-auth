@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthenticateSessionController;
+use App\Http\Controllers\Api\Auth\RegisterNewUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -8,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('register', 'AuthController@logout');
+    Route::post('login', [AuthenticateSessionController::class, 'store']);
+    Route::post('register', [RegisterNewUserController::class, 'store']);
 });
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'auth'], function () {
